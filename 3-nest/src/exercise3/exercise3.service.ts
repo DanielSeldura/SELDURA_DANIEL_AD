@@ -20,6 +20,6 @@ export class Exercise3Service {
     }
     
     primeNumber(num:number):string{
-        return "YOUR RETURN STRING HERE";
+        return "YOUR NEW STRING STRING HERE";
     }
 }
