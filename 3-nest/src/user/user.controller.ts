@@ -35,22 +35,22 @@ export class UserController {
 
   @Get('/:id')
   getUserID(@Param('id') id: string) {
-    return this.userService.getOne(parseInt(id));
+    return this.userService.getOne(id);
   }
 
   @Put('/:id')
   replaceValuePut(@Param('id') id: string, @Body() body: any) {
-    return this.userService.replaceValuePut(parseInt(id), body);
+    return this.userService.replaceValuePut(id, body);
   }
 
   @Patch('/:id')
   replaceValuePatch(@Param('id') id: string, @Body() body: any) {
-    return this.userService.replaceValuePatch(parseInt(id), body);
+    return this.userService.replaceValuePatch(id, body);
   }
 
   @Delete('/:id')
   deleteUser(@Param('id') id: string) {
-    return this.userService.deleteUser(parseInt(id));
+    return this.userService.deleteUser(id);
   }
 
 
