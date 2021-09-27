@@ -27,22 +27,7 @@ export class User {
     }
   }
 
-  patch(body: any): { valid: boolean; error: string } {
-    try {
-      var keys: Array<string> = Helper.describeClass(User);
-      keys = Helper.removeItemOnce(keys, 'id');
-      for (const key of Object.keys(body)) {
-        if (keys.includes(`${key}`)) {
-          this[key] = body[key];
-        }
-      }
-      return { valid: true, error: null };
-    } catch (error) {
-      return { valid: true, error: error };
-    }
-  }
-
-  matches(term: string): boolean {
+   matches(term: string): boolean {
     var keys: Array<string> = Helper.describeClass(User);
     keys = Helper.removeItemOnce(keys, 'password');
     for (const key of keys) {
