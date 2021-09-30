@@ -40,7 +40,8 @@ export class Helper {
 
   static validBody(body: any): { valid: boolean; data: string } {
     try {
-      var keys: Array<string> = Helper.describeClass(User);
+    //   var keys: Array<string> = Helper.describeClass(User);
+    var keys: Array<string> = ['name', 'age', 'email', 'password'];
       var types: Map<string, string> = new Map<string, string>();
       types.set('name', typeof '');
       types.set('age', typeof 0);

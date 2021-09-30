@@ -16,6 +16,7 @@ export class User {
   }
 
   login(password: string): CRUDReturn {
+    console.log(`current password ${this.password}, attempt: ${password}`);
     try {
       if (this.password === password) {
         return { success: true, data: this.toJson() };

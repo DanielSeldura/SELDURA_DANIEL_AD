@@ -1,24 +1,26 @@
 import { CRUDReturn } from './user.resource/crud_return.interface';
 import { Helper } from './user.resource/helper';
-import {
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './user.resource/user.model';
 
 const DEBUG: boolean = true;
 @Injectable()
 export class UserService {
   private users: Map<string, User> = new Map<string, User>();
-  email: string;
-  password: string;
 
   constructor() {
     this.users = Helper.populate();
-    if (DEBUG) this.logAllUsers();
   }
+
+
+  
+
+
+
   register(body: any): CRUDReturn {
     try {
-      var validBody: { valid: boolean; data: string } = Helper.validBody(body);
+      var validBody: { valid: boolean; data: string } =
+        Helper.validBodyPut(body);
       if (validBody.valid) {
         if (!this.emailExists(body.email)) {
           var newUser: User = new User(
@@ -59,10 +61,14 @@ export class UserService {
 
   getAll(): CRUDReturn {
     var results: Array<any> = [];
-    for (const user of this.users.values()) {
-      results.push(user.toJson());
+    try {
+      for (const user of this.users.values()) {
+        results.push(user.toJson());
+      }
+      return { success: true, data: results };
+    } catch (e) {
+      return { success: false, data: e };
     }
-    return { success: results.length > 0, data: results };
   }
 
   searchUser(term: string): CRUDReturn {
@@ -73,7 +79,7 @@ export class UserService {
     return { success: results.length > 0, data: results };
   }
 
-  replaceValuePut(id: string, body: any) {
+  replaceValuePut(id: string, body: any):CRUDReturn {
     try {
       if (this.users.has(id)) {
         var validBodyPut: { valid: boolean; data: string } =
@@ -102,12 +108,12 @@ export class UserService {
     } catch (error) {
       return {
         success: false,
-        error: error.message,
+        data: error.message,
       };
     }
   }
 
-  replaceValuePatch(id: string, body: any) {
+  replaceValuePatch(id: string, body: any):CRUDReturn {
     try {
       if (this.users.has(id)) {
         var validBodyPatch: { valid: boolean; data: string } =
@@ -136,7 +142,7 @@ export class UserService {
     } catch (error) {
       return {
         success: false,
-        error: error.message,
+        data: error.message,
       };
     }
   }
@@ -156,9 +162,12 @@ export class UserService {
 
   login(email: string, password: string) {
     for (const user of this.users.values()) {
-      if (user.matches(email)) return user.login(password);
+      if (user.matches(email)) {
+        console.log(email,password);
+        return user.login(password);
+      }
     }
-    return { success: false, message: `${email} not found in database` };
+    return { success: false, data: `${email} not found in database` };
   }
 
   //secondary functions
