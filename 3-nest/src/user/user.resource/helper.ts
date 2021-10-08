@@ -33,7 +33,8 @@ export class Helper {
       });
       return result;
     } catch (error) {
-      console.log(error);
+      console.log("Helper.populate error");
+      console.log(error.message);
       return null;
     }
   }
@@ -61,7 +62,7 @@ export class Helper {
       }
       return { valid: true, data: null };
     } catch (error) {
-      return { valid: false, data: error.message };
+      return { valid: false, data: error.message, };
     }
   }
 
@@ -78,12 +79,12 @@ export class Helper {
           }
         }
         if (keys.length > 0) {
-          throw Error(`Payload is missing ${keys}`);
+          throw new Error(`Payload is missing ${keys}`);
         }
         return { valid: true, data: null };
-      } else throw Error(bodyValidation.data);
+      } else throw new Error(bodyValidation.data);
     } catch (error) {
-      return { valid: false, data: error.message };
+      return { valid: false, data: error.message, };
     }
   }
 }
