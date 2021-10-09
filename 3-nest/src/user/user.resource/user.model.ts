@@ -95,6 +95,28 @@ export class User {
       return { success: false, data: error.message, };
     }
   }
+  //hidePassword is used to return data without the id
+  toJson(hidePassword: boolean = true): {
+    id?: string;
+    name: string;
+    age: number;
+    email: string;
+    password?: string;
+  } {
+    if (hidePassword)
+      return {
+        id: this.id,
+        name: this.name,
+        age: this.age,
+        email: this.email,
+      };
+    return {
+      name: this.name,
+      age: this.age,
+      email: this.email,
+      password: this.password,
+    };
+  }
 
   login(password: string): CRUDReturn {
     console.log(`current password ${this.password}, attempt: ${password}`);
@@ -137,26 +159,5 @@ export class User {
     console.log(this.toJson());
   }
 
-  //hidePassword is used to return data without the id
-  toJson(hidePassword: boolean = true): {
-    id?: string;
-    name: string;
-    age: number;
-    email: string;
-    password?: string;
-  } {
-    if (hidePassword)
-      return {
-        id: this.id,
-        name: this.name,
-        age: this.age,
-        email: this.email,
-      };
-    return {
-      name: this.name,
-      age: this.age,
-      email: this.email,
-      password: this.password,
-    };
-  }
+
 }
