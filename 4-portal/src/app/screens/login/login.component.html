@@ -1,0 +1,11 @@
+<div class="mainContent">
+  <div class="login">
+    <div class="inputs">
+      <label for="EMAIL">Email</label>
+      <input type="email" name="EMAIL" #email />
+      <label for="PASSWORD">Password</label>
+      <input type="password" name="PASSWORD" #password />
+    </div>
+    <button (click)="login(email.value, password.value)">LOGIN</button>
+  </div>
+</div>

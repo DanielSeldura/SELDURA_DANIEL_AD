@@ -1,0 +1,60 @@
+.mainContent {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-image: url("../../../assets/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-position-x: relative;
+  background-position-y: relative;
+
+  .login {
+    background-color: black;
+    background-image: url("../../../assets/portalBorder.jpg");
+    background-position: center;
+    background-position-y: -80.7px;
+    background-position-x: -38.7px;
+    background-size: 657px;
+    background-repeat: no-repeat;
+    width: 580px;
+    height: 298.7px;
+    border-radius: 10px;
+    padding-top: 40px;
+    padding-right: 24px;
+    padding-left: 24px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  input {
+    padding-top: 4px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+  }
+  
+  label {
+    padding-bottom: 6px;
+  }
+  
+  button {
+    margin: auto;
+    width: 180px;
+    height: 32px;
+    border-radius: 10px;
+    font-style: inherit;
+  }
+  
+
+}
+
