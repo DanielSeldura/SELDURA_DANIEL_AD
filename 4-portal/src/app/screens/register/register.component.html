@@ -1,0 +1,25 @@
+<div class="mainContent">
+  <div class="login">
+    <form class="inputs" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <label for="NAME">Name</label>
+      <input type="text" name="NAME" formControlName="fcName" />
+      <label for="AGE">Age</label>
+      <input type="number" name="AGE" formControlName="fcAge" />
+      <label for="EMAIL">Email</label>
+      <input type="email" name="EMAIL" formControlName="fcEmail" />
+      <label for="PASSWORD">Password</label>
+      <input type="password" name="PASSWORD" formControlName="fcPassword" />
+      <label for="PASSWORD_2">Confirm Password</label>
+      <input type="password" name="PASSWORD_2" formControlName="fcPassword2" />
+
+      <p>{{ error | json }}</p>
+      <p>{{ registerForm.status }}</p>
+      <button type="submit" [disabled]="!registerForm.valid">
+        CREATE ACCOUNT
+      </button>
+    </form>
+    <div class="actions">
+      <button (click)="nav('login')">BACK TO LOGIN</button>
+    </div>
+  </div>
+</div>
