@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,8 +36,20 @@ export class RegisterComponent implements OnInit {
         return;
       }
     }
-    if(this.registerForm.valid){
-      this.error = this.registerForm.value;
+    if (this.registerForm.valid) {
+      var payload: {
+        name: string;
+        email: string;
+        age: number;
+        password: string;
+      };
+      payload = {
+        name: this.registerForm.value.fcName,
+        age: this.registerForm.value.fcAge,
+        email: this.registerForm.value.fcEmail,
+        password: this.registerForm.value.fcPassword,
+      };
+      console.log(payload);
     }
   }
 
