@@ -5,15 +5,11 @@
       <input type="email" name="EMAIL" [formControl]="fcEmail" />
       <label for="PASSWORD">Password</label>
       <input type="password" name="PASSWORD" [formControl]="fcPassword" />
+      <h5 *ngIf="error!=''">{{error}}</h5>
     </div>
-    <p>{{requestResult | json}}</p>
-    <!-- <div>
-      {{ fcEmail.value }}
-      {{ fcPassword.value }}
-    </div> -->
     <div class="actions">
       <button  (click)="login()">LOGIN</button>
-      <button (click)="nav('register')">REGISTER</button>
     </div>
+    <h5 (click)="nav('register')">No account yet? Create an account</h5>
   </div>
 </div>

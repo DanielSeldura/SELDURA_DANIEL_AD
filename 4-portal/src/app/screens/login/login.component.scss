@@ -1,6 +1,5 @@
 .mainContent {
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -37,5 +36,8 @@
       }
     }
 
+  }
+  h5, button{
+    cursor: pointer;
   }
 }

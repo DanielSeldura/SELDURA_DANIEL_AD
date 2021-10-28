@@ -1,0 +1,26 @@
+<div class="userMain">
+  <table>
+    <thead>
+      Users
+      <h3 (click)="resetDB()">Repopulate db</h3>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.age }}</td>
+        <td>
+          <fa-icon (click)="deleteUser(i)" [icon]="faTrash"></fa-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

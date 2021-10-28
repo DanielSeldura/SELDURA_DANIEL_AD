@@ -12,14 +12,12 @@
         <label for="PASSWORD_2">Confirm Password</label>
         <input type="password" name="PASSWORD_2" formControlName="fcPassword2" />
   
-        <p>{{ error }}</p>
-        <p>{{registerForm.value | json}}</p>
-        <p>{{ registerForm.status }}</p>
         <button type="submit" [disabled]="!registerForm.valid">
           CREATE ACCOUNT
         </button>
       </form>
       <div class="actions">
+        {{error}}
         <button (click)="nav('login')">BACK TO LOGIN</button>
       </div>
     </div>

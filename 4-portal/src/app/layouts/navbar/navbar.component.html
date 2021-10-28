@@ -1,0 +1,9 @@
+<div class="nav-body">
+  <div class="site-title"><h3 (click)="nav('home')">Portal</h3></div>
+  <div class="site-links">
+  </div>
+  <div class="site-user">
+    <h5 *ngIf="auth.authenticated" (click)='logout()'>Logout</h5>
+    <h5 *ngIf="!auth.authenticated" (click)="nav('login')">Login</h5>
+  </div>
+</div>

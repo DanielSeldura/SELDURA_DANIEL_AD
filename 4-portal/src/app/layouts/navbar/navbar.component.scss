@@ -1,0 +1,26 @@
+.nav-body {
+  height: 64px;
+  padding: 0 16px 0 16px;
+  display: grid;
+  grid-template-columns: 50px auto 50px;
+  align-items: center;
+  justify-items: center;
+  color: #edf5e1;
+  .site-title {
+    h3 {
+      cursor: pointer;
+    }
+  }
+
+  .site-links {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+   
+  }
+  h5 {
+    margin: 0 8px 0 8px;
+    cursor: pointer;
+  }
+}

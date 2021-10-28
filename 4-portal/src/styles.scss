@@ -1,24 +1,32 @@
-
 /* You can add global styles to this file, and also import other style files */
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
+
 html {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: lightgray;
+  font-family: "Roboto", sans-serif;
+  background-color: #5cdb95;
+  color: #05386b;
+}
+
+h3 {
+  color: #05386b;
+}
+h5 {
+  color: #05386b;
 }
