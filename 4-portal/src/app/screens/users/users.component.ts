@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/shared/api.service';
 })
 export class UsersComponent implements OnInit {
   users: Array<User> = [];
-
+  
   //icons
   faTrash = faTrash;
   faEdit = faEdit;
@@ -21,6 +21,17 @@ export class UsersComponent implements OnInit {
     this.getData();
   }
 
+  async search(term:any){
+   var result = await this.api.get(`/user/search/${term}`);
+   var temp: Array<User> = [];
+   if (result.success) {
+     result.data.forEach((json: any) => {
+       var tempU = User.fromJson(json.id, json);
+       if (tempU != null) temp.push(tempU);
+     });
+   }
+   return temp;
+  }
   async deleteUser(i: number) {
     var decision = confirm('Delete user ' + this.users[i].name);
     if(decision)
@@ -46,10 +57,13 @@ export class UsersComponent implements OnInit {
     this.getData();
   }
   async getData(term?: string) {
-    if (term == undefined || term == null) {
+    if (term == undefined || term == null || term=='') {
       this.users = await this.getAll();
-      console.log(this.users);
     }
+    else {
+      this.users = await this.search(term);
+    }
+    console.log(this.users);
   }
   async getAll(): Promise<Array<User>> {
     var result = await this.api.get('/user/all');
