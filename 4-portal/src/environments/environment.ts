@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL:"https://api.appsdev.phdev.team"
+  API_URL:"http://localhost:3000"
 };
 
 /*

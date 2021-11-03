@@ -1,5 +1,5 @@
 <div class="userMain">
-  <table>
+  <table *ngIf="viewedUserIndex==undefined">
     <thead>
       Users
       <h3 (click)="resetDB()">Repopulate db</h3>
@@ -19,8 +19,11 @@
         <td>{{ user.age }}</td>
         <td>
           <fa-icon (click)="deleteUser(i)" [icon]="faTrash"></fa-icon>
+          <fa-icon (click)="viewUserData(i)" [icon]="faEdit"></fa-icon>
         </td>
       </tr>
     </tbody>
   </table>
+  <edit-user *ngIf="viewedUserIndex!=undefined" [user]="users[viewedUserIndex]" (backEvent)="handleBackEvent($event)"></edit-user>
+
 </div>

@@ -1,0 +1,19 @@
+<div class="mainContent">
+    <div class="login">
+      <form class="inputs" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <label for="NAME">Name</label>
+        <input type="text" name="NAME" formControlName="fcName" />
+        <label for="AGE">Age</label>
+        <input type="number" name="AGE" formControlName="fcAge" />
+        <label for="EMAIL">Email</label>
+        <input type="email" name="EMAIL" formControlName="fcEmail" />
+        <button type="submit" [disabled]="!registerForm.valid">
+          CREATE ACCOUNT
+        </button>
+      </form>
+      <div class="actions">
+        {{error}}
+        <button (click)="goBack()">BACK</button>
+      </div>
+    </div>
+  </div>

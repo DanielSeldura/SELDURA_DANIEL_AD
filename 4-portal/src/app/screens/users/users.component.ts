@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/model/user.model';
 import { ApiService } from 'src/app/shared/api.service';
 
@@ -13,6 +13,8 @@ export class UsersComponent implements OnInit {
 
   //icons
   faTrash = faTrash;
+  faEdit = faEdit;
+  viewedUserIndex:number | undefined;
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
@@ -28,6 +30,15 @@ export class UsersComponent implements OnInit {
         this.getData();
       }
     }
+  }
+
+  handleBackEvent(event:any){
+    if(event  == true){
+      this.viewedUserIndex = undefined;
+    }
+  }
+  viewUserData(i:number) {
+   this.viewedUserIndex = i;
   }
 
   async resetDB(){

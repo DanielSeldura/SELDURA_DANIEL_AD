@@ -16,6 +16,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { AuthService } from './shared/auth.service';
 import { UsersComponent } from './screens/users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EditComponent } from './screens/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DefaultLayoutComponent,
     NavbarComponent,
     FooterComponent,
-    UsersComponent
+    UsersComponent,
+    EditComponent
   ],
   imports: [
     HttpClientModule,
