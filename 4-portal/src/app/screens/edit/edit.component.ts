@@ -38,6 +38,13 @@ export class EditComponent implements OnInit {
     }
   }
 
+  clearForm(){
+    this.registerForm.setValue({
+      fcName:'',
+      fcAge: 0,
+      fcEmail:''
+    });
+  }
   onSubmit() {
     if (
       this.registerForm.value['fcPassword'] !==
