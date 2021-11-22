@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "appsdev-2021-sem1"
+  },
+  "targets": {
+    "appsdev-2021-sem1": {
+      "hosting": {
+        "portal": [
+          "appsdev-2021-sem1"
+        ]
+      }
+    }
   }
 }

@@ -9,15 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './screens/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-import { ApiService } from './shared/api.service';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { AuthService } from './shared/auth.service';
 import { UsersComponent } from './screens/users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditComponent } from './screens/edit/edit.component';
-
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { EditComponent } from './screens/edit/edit.component';
     NavbarComponent,
     FooterComponent,
     UsersComponent,
-    EditComponent
+    EditComponent,
   ],
   imports: [
     HttpClientModule,
@@ -36,9 +37,12 @@ import { EditComponent } from './screens/edit/edit.component';
     AppRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
-  providers: [ApiService, AuthService],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
