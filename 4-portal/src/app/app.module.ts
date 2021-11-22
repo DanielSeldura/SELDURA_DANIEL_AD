@@ -17,6 +17,9 @@ import { AuthService } from './shared/auth.service';
 import { UsersComponent } from './screens/users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditComponent } from './screens/edit/edit.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { EditComponent } from './screens/edit/edit.component';
     AppRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [ApiService, AuthService],
   bootstrap: [AppComponent]
