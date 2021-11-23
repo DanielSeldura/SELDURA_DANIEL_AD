@@ -76,11 +76,13 @@ export class AuthService {
     email: string;
     password: string;
   }): Promise<CRUDReturn> {
+    //send the registration request to the Api
     var result: any = await this.api.post('/user/register', payload);
     var output: CRUDReturn = { success: result.success, data: result.data };
     if (output.success === true) {
       this.user = User.fromJson(output.data.id, output.data);
       var resultOfLogin: any;
+      //sign in the frontend if registration is successful;
       try {
         resultOfLogin = await this.afAuth.signInWithEmailAndPassword(
           payload.email,

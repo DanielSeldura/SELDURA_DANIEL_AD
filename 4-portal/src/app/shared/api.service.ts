@@ -11,7 +11,6 @@ export class ApiService {
   async post(url: string, body: any): Promise<any> {
     try {
       var token: string = await this.getAuthToken();
-      console.log(token);
       return await this.api
         .post(environment.API_URL + url, body, {
           headers: new HttpHeaders({
@@ -26,10 +25,11 @@ export class ApiService {
   }
   async get(url: string): Promise<any> {
     try {
+      var token: string = await this.getAuthToken();
       return await this.api
         .get(environment.API_URL + url, {
           headers: new HttpHeaders({
-            authportal: await this.getAuthToken(),
+            authportal: token,
           }),
         })
         .toPromise();
@@ -54,10 +54,11 @@ export class ApiService {
   }
   async delete(url: string): Promise<any> {
     try {
+      var token: string = await this.getAuthToken();
       return await this.api
         .delete(environment.API_URL + url, {
           headers: new HttpHeaders({
-            authportal: await this.getAuthToken(),
+            authportal: token,
           }),
         })
         .toPromise();
@@ -77,6 +78,5 @@ export class ApiService {
       console.log(error);
       return 'errorGeneratingToken';
     }
-   
   }
 }
