@@ -52,14 +52,9 @@ export class RegisterComponent implements OnInit {
         email: this.registerForm.value.fcEmail,
         password: this.registerForm.value.fcPassword,
       };
-      this.auth.register(payload).then((data) => {
-        console.log(data);
-        if (this.auth.authenticated) {
-          this.nav('home');
-        } else {
-          this.error = data.data;
-          console.log(this.error);
-        }
+      this.auth.register(payload).then(data=>{
+        if(!data.success) this.error = data.data;
+        else this.nav("home");
       });
     }
   }

@@ -23,6 +23,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
+import { AuthGuard } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [{ provide: PERSISTENCE, useValue: 'session' },],
+  providers: [{ provide: PERSISTENCE, useValue: 'session' },AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -106,9 +106,11 @@ export class UserService {
     try {
       var result = await this.DB.collection("users").doc(id).get();
       if (result.exists) {
+        var temp: {} = result.data();
+        temp['id'] = result.id;
         return {
           success: true,
-          data: result.data(),
+          data: temp,
         };
       } else {
         return {
