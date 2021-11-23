@@ -17,9 +17,12 @@ import { AuthService } from './shared/auth.service';
 import { UsersComponent } from './screens/users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditComponent } from './screens/edit/edit.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     NavbarComponent,
     FooterComponent,
     UsersComponent,
-    EditComponent
+    EditComponent,
   ],
   imports: [
     HttpClientModule,
@@ -40,10 +43,13 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     ReactiveFormsModule,
     SharedModule,
     FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
   ],
-  providers: [ApiService, AuthService],
-  bootstrap: [AppComponent]
+  providers: [{ provide: PERSISTENCE, useValue: 'session' },],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

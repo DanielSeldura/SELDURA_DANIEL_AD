@@ -8,13 +8,11 @@ export class User {
   private name: string;
   private age: number;
   public email: string;
-  private password: string;
 
   constructor(
     name: string,
     age: number,
     email: string,
-    password: string,
     id?: string
   ) {
     if (id != undefined) {
@@ -25,7 +23,6 @@ export class User {
     this.name = name;
     this.age = age;
     this.email = email;
-    this.password = password;
   }
 
   static async retrieve(id: string): Promise<User> {
@@ -38,7 +35,6 @@ export class User {
           data["name"],
           data["age"],
           data["email"],
-          data["password"],
           result.id
         );
       } else {
@@ -63,7 +59,6 @@ export class User {
         data["name"],
         data["age"],
         data["email"],
-        data["password"],
         doc.id
       );
     }
@@ -114,22 +109,9 @@ export class User {
       name: this.name,
       age: this.age,
       email: this.email,
-      password: this.password,
     };
   }
 
-  login(password: string): CRUDReturn {
-    console.log(`current password ${this.password}, attempt: ${password}`);
-    try {
-      if (this.password === password) {
-        return { success: true, data: this.toJson() };
-      } else {
-        throw new Error(`${this.email} login fail, password does not match`);
-      }
-    } catch (error) {
-      return { success: false, data: error.message, };
-    }
-  }
 
   matches(term: string): boolean {
     var keys: Array<string> = Helper.describeClass(User);

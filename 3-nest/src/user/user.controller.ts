@@ -19,11 +19,6 @@ export class UserController {
     return this.userService.register(body);
   }
 
-  @Post('/login')
-  login(@Body('email') email: string, @Body('password') password: string) {
-    return this.userService.login(email, password);
-  }
-
   @Get('/all')
   getAllUser() {
     return this.userService.getAll();

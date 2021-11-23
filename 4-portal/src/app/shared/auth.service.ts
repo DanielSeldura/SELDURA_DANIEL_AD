@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { ApiService } from './api.service';
 import { CRUDReturn } from '../model/crud_return.interface';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   public user?: User | null;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private fAuth: AngularFireAuth) {}
 
   get authenticated(): boolean {
     return this.user != undefined && this.user != null;
@@ -16,7 +17,13 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<CRUDReturn> {
     try {
-      var result: any = await this.api.post('/user/login', { email, password });
+      //log in to firebase auth
+      var resultOfLogin = await this.fAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      //get the data from the db regarding the user
+      var result: any = await this.api.get(`/user/${resultOfLogin.user?.uid}`);
       var output: CRUDReturn = { success: result.success, data: result.data };
       if (output.success === true) {
         this.user = User.fromJson(output.data.id, output.data);

@@ -4,11 +4,13 @@ import { CRUDReturn } from "./user.resource/crud_return.interface";
 import { Helper } from "./user.resource/helper";
 import { Injectable } from "@nestjs/common";
 import { User } from "./user.resource/user.model";
+import { auth } from "firebase-admin";
 
 const DEBUG: boolean = true;
 @Injectable()
 export class UserService {
   private DB = admin.firestore();
+  private AUTH: auth.Auth = admin.auth();
   constructor() {}
 
   // advanced version
@@ -65,14 +67,22 @@ export class UserService {
         var exists = await this.emailExists(body.email);
         console.log(`Does ${body.email} exist in db? ${exists}`);
         if (!exists) {
+          var authCreationResult: auth.UserRecord;
+          try {
+            authCreationResult = await this.AUTH.createUser({
+              email: body.email,
+              password: body.password,
+            });
+          } catch (error) {
+            throw error;
+          }
           var newUser: User = new User(
             body.name,
             body.age,
-            body.email,
-            body.password
+            authCreationResult.email,
+            authCreationResult.uid
           );
           if (await this.saveToDB(newUser)) {
-            // if (DEBUG) await this.logAllUsers();
             return {
               success: true,
               data: newUser.toJson(),
@@ -138,13 +148,7 @@ export class UserService {
         if (doc.exists) {
           var data = doc.data();
           results.push(
-            new User(
-              data["name"],
-              data["age"],
-              data["email"],
-              data["password"],
-              doc.id
-            )
+            new User(data["name"], data["age"], data["email"], doc.id)
           );
         }
       });
@@ -164,7 +168,7 @@ export class UserService {
       return { success: results.length > 0, data: results };
     } catch (error) {
       console.log(error.message);
-      return { success: false, data: error.message, };
+      return { success: false, data: error.message };
     }
   }
 
@@ -271,21 +275,6 @@ export class UserService {
         success: false,
         data: error.message,
       };
-    }
-  }
-
-  async login(email: string, password: string): Promise<CRUDReturn> {
-    try {
-      var user: User = await User.retrieveViaEmail(email);
-      if (user != null) {
-        return user.login(password);
-      } else {
-        return { success: false, data: `${email} not found in database` };
-      }
-    } catch (error) {
-      console.log("Login error");
-      console.log(error.message);
-      return { success: false, data: error.message, };
     }
   }
 
