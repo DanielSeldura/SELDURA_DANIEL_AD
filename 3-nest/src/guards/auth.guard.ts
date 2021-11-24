@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 import { Observable } from "rxjs";
 import * as admin from "firebase-admin";
-//the jwt is named amapiauth
+//the jwt is named authportal
 @Injectable()
 export class AuthGuard implements CanActivate {
   private readonly logger = new Logger("AuthGuard");

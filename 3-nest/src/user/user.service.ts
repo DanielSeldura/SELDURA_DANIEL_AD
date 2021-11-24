@@ -67,6 +67,7 @@ export class UserService {
         var exists = await this.emailExists(body.email);
         console.log(`Does ${body.email} exist in db? ${exists}`);
         if (!exists) {
+          //create the Firebase Auth user
           var authCreationResult: auth.UserRecord;
           try {
             authCreationResult = await this.AUTH.createUser({
@@ -76,6 +77,7 @@ export class UserService {
           } catch (error) {
             throw error;
           }
+          //create the Firestore Database entry for the user if it is successful
           var newUser: User = new User(
             body.name,
             body.age,
