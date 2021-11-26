@@ -15,10 +15,14 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { UsersComponent } from './screens/users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditComponent } from './screens/edit/edit.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
+import { AuthGuard } from './shared/auth-guard.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +45,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
-  providers: [],
+  providers: [{ provide: PERSISTENCE, useValue: 'session' },AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

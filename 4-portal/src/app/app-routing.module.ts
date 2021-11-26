@@ -4,16 +4,13 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
 import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
 import { RegisterComponent } from './screens/register/register.component';
+import { AuthGuard } from './shared/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
     children: [
-      {
-        path: '',
-        component: LoginComponent,
-      },
       {
         path: 'login',
         component: LoginComponent,
@@ -23,7 +20,13 @@ const routes: Routes = [
         component: RegisterComponent,
       },
       {
+        path: '',
+        canActivate:[AuthGuard],
+        component: HomeComponent,
+      },
+      {
         path: 'home',
+        canActivate:[AuthGuard],
         component: HomeComponent,
       },
     ],

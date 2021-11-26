@@ -19,16 +19,18 @@ export class LoginComponent implements OnInit {
   requestResult = '';
   error = '';
   async login() {
-    this.error = '';
-    var result: any = await this.auth.login(
-      this.fcEmail.value,
-      this.fcPassword.value
-    );
-    console.log(result);
-    if (this.auth.authenticated) {
-      this.nav('home');
-    } else {
-      this.error = result.data;
+    try {
+      this.error = '';
+      var result: any = await this.auth.login(
+        this.fcEmail.value,
+        this.fcPassword.value
+      );
+      console.log(result);
+      if (!this.auth.authenticated) {
+        this.error = result.data;
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
   nav(destination: string) {

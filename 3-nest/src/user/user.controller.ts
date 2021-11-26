@@ -7,7 +7,9 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 import { UserService } from './user.service';
 
@@ -19,11 +21,6 @@ export class UserController {
     return this.userService.register(body);
   }
 
-  @Post('/login')
-  login(@Body('email') email: string, @Body('password') password: string) {
-    return this.userService.login(email, password);
-  }
-
   @Get('/all')
   getAllUser() {
     return this.userService.getAll();
@@ -33,6 +30,7 @@ export class UserController {
     return this.userService.searchUser(term);
   }
 
+  @UseGuards(AuthGuard)
   @Get('/:id')
   getUserID(@Param('id') id: string) {
     return this.userService.getOne(id);

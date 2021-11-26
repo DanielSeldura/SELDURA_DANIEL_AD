@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
-const DB_CREDENTIALS = require("../my-key.json");
+const DB_CREDENTIALS = require("../my-key2.json");
 async function bootstrap() {
   admin.initializeApp({
     credential: admin.credential.cert(DB_CREDENTIALS),
