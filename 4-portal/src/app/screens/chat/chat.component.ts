@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/shared/api.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -13,8 +14,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   chatSubscription!: Subscription;
   messagesReceived: Array<MessageInterface> = [];
   fcMessage = new FormControl();
-  fcUsername = new FormControl('User001');
-  constructor(private afDb: AngularFirestore, private api: ApiService) {}
+  constructor(private afDb: AngularFirestore, private api: ApiService, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.chatSubscription = this.afDb
@@ -30,6 +30,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             sent: doc.sent.toDate(),
           };
           this.messagesReceived.push(payload);
+          console.log(payload);
         });
         this.messagesReceived.sort((a, b) => {
           if (a.sent.valueOf() < b.sent.valueOf()) return -1;
@@ -45,8 +46,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   async send() {
     var payload = {
       message: this.fcMessage.value,
-      uid: 'someRandomUID',
-      userName: this.fcUsername.value,
+      uid: this.auth.user?.id,
+      userName: this.auth.user?.name,
     };
     await this.api.post('/chat/send', payload);
     this.fcMessage.setValue('');
