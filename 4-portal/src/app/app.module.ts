@@ -22,6 +22,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { AuthGuard } from './shared/auth-guard.service';
+import { ChatComponent } from './screens/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthGuard } from './shared/auth-guard.service';
     FooterComponent,
     UsersComponent,
     EditComponent,
+    ChatComponent,
   ],
   imports: [
     HttpClientModule,
