@@ -1,0 +1,7 @@
+<p>Silent mode</p>
+<input type="file" (change)="uploadFileSilent($event)" />
+<p>Trackable Progress</p>
+<input type="file" (change)="uploadFile($event)" />
+<div>{{ uploadPercent | async }}</div>
+<a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+<img [src]="downloadURL | async" alt="" />

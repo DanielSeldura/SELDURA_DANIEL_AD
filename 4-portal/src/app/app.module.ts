@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './screens/login/login.component';
@@ -21,8 +20,10 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AuthGuard } from './shared/auth-guard.service';
 import { ChatComponent } from './screens/chat/chat.component';
+import { UploadComponent } from './screens/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ChatComponent } from './screens/chat/chat.component';
     UsersComponent,
     EditComponent,
     ChatComponent,
+    UploadComponent,
   ],
   imports: [
     HttpClientModule,
@@ -47,10 +49,11 @@ import { ChatComponent } from './screens/chat/chat.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [{ provide: PERSISTENCE, useValue: 'session' },AuthGuard],
+  providers: [{ provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
